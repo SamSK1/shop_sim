@@ -3,3 +3,14 @@
     height: 12rem;
     margin-right: 2rem;
 }
+.nav-bar{
+    
+}
+@media screen and (max-width:1000px) {
+    .image{
+        padding-bottom: 5rem;
+    }
+    #mobile_button{
+        margin-bottom: 5rem;
+    }
+}
