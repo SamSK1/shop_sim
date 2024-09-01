@@ -4,7 +4,7 @@
     margin-right: 2rem;
 }
 .nav-bar{
-    
+    width: 101%;
 }
 @media screen and (max-width:1000px) {
     .image{

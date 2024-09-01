@@ -2,7 +2,7 @@
     {% block content %}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <div class="row">
-        {% for item in all_items %}
+        {% for item in all_items if item.item_count>0 %}
         <div class="col-sm-4" style="margin-bottom: 2rem; margin-top: 1rem;">
           <div class="card">
             <img src="{{ url_for('static', filename=item['item_img']) }}" alt="Item Image" style="width: 15rem; height: 15rem; margin: auto;">
