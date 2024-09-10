@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+    {% block content %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <div class="row">
+        {% for item in found_items if item.item_count>0%}
+        <div class="col-sm-4" style="margin-bottom: 2rem; margin-top: 1rem;">
+          <div class="card">
+            <img src="{{ url_for('static', filename=item['item_img']) }}" alt="Item Image" style="width: 15rem; height: 15rem; margin: auto;">
+            <div class="card-body">
+              <h5 class="card-title" >{{item.item_name}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">CHF {{item.item_price}}</h6>
+                <p class="card-text">{{item.item_description}}</p>
+                <p class="card-text" >In stock: {{item.item_count}}</p>
+              <a href="#" class="btn btn-success">Add to buscket</a>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+        
+    </div>
+
+
+
+    {%  endblock %}

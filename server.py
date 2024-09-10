@@ -23,6 +23,7 @@ def another_page():
 def item_page():
     all_items=[]
     try:
+        
         with sqlite3.connect('flask_store_project.db') as db:
             db.row_factory=sqlite3.Row
             cursor=db.cursor()
@@ -50,7 +51,7 @@ def add_item():
         item_count = data['item_count']
         item_img = data['item_img']
         item_category = data['item_category']
-
+        
         with sqlite3.connect('flask_store_project.db') as db:
             cursor = db.cursor()
             cursor.execute(
@@ -94,6 +95,25 @@ def update_item(item_id):
         message="Error: "+str(e)
     return jsonify(message=message)
 
+
+@app.route('/search_items/',methods=['GET'])
+def search_items():
+    item_name_contains=request.args.get('item_name')
+    item_name_contains=item_name_contains.strip()
+    
+    # print('!!!'+items_name_contains_cap)
+    found_items=[]
+    try:
+        with sqlite3.connect('flask_store_project.db') as db:
+            db.row_factory=sqlite3.Row
+            cursor=db.cursor()
+            cursor.execute('SELECT * FROM Items WHERE item_name LIKE ? ',(f'%{item_name_contains}%',)) 
+            found_items=cursor.fetchall()
+    except Exception as e:
+        db.rollback()
+        return jsonify('Error: '+str(e))
+    
+    return render_template('search_items.html',found_items=found_items)
 
 if __name__=='__main__':
     app.run(debug=True)
